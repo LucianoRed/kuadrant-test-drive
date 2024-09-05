@@ -1,0 +1,44 @@
+---
+- name: Create a NS record for subdomain in Route53
+  hosts: localhost
+  gather_facts: no
+  vars:
+    domain_name: "{{ lookup('env', 'AWSTOPDOMAIN') }}"
+    subdomain_name: "managed"
+    ttl: 300
+    aws_region: "us-east-1"
+  tasks:
+  - name: Create Managed Zone
+    amazon.aws.route53_zone:
+      state: present
+      zone: "{{ subdomain_name }}.{{ domain_name }}"
+
+  - name: Get facts bout domain
+    amazon.aws.route53:
+      state: get
+      zone: "{{ subdomain_name }}.{{ domain_name }}"
+      type: "NS"
+      record: "{{ subdomain_name }}.{{ domain_name }}"
+    register: rec
+  - name: Create NS record in the top domain
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "{{ subdomain_name }}.{{ domain_name }}"
+      type: NS
+      ttl: "{{ ttl }}"
+      value: "{{ rec.resource_record_sets[0].resource_records | map(attribute='value') | list }}"
+    register: ns_creation
+
+  - debug:
+      msg: "NS record for {{ subdomain_name }}.{{ domain_name }} created in top domain with NS servers: {{ rec.resource_record_sets[0].resource_records | map(attribute='value') | list }}"
+
+  - name: Create a test entry
+    amazon.aws.route53:
+      state: present
+      zone: "{{ subdomain_name }}.{{ domain_name }}"
+      record: "test.{{ subdomain_name }}.{{ domain_name }}"
+      type: A
+      ttl: 3600
+      value: 127.0.0.1
+      wait: true
