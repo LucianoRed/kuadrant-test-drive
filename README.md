@@ -34,7 +34,7 @@ Agora basta clonar o repositorio https://github.com/rh-soln-pattern-connectivity
 
 ```bash
 git clone https://github.com/rh-soln-pattern-connectivity-link/connectivity-link-ansible
-cp inventory.template connectivity-link-ansible/inventories/
+cp inventory.template connectivity-link-ansible/operator-setup/inventories
 cd connectivity-link-ansible/operator-setup/
 ansible-playbook playbooks/ocp4_workload_connectivity_link.yml -e ACTION=create -i inventories/inventory.template
 ```
