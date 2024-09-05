@@ -30,3 +30,13 @@ ansible-playbook cria_managed_zone.yaml
 
 Este playbook já cria a managed zone, obtem o id, e já popula o arquivo inventory.template. 
 
+Agora basta clonar o repositorio https://github.com/rh-soln-pattern-connectivity-link/connectivity-link-ansible
+
+```bash
+git clone https://github.com/rh-soln-pattern-connectivity-link/connectivity-link-ansible
+cp inventory.template connectivity-link-ansible/inventories/
+cd connectivity-link-ansible/operator-setup/
+ansible-playbook playbooks/ocp4_workload_connectivity_link.yml -e ACTION=create -i inventories/inventory.template
+```
+
+
