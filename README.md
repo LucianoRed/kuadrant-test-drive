@@ -7,6 +7,9 @@ Scripts Ansible para preparar ambiente de TD de quadrant
 * Ansible instalado
 
 ### Test Drive Guia
+
+Baseado no guia em: https://github.com/redhat-solution-patterns/soln-pattern-connectivity-link
+
 ```bash
 oc new-project td-rhcl
 oc new-app quay.io/ricardi/rhcltd
