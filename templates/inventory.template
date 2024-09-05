@@ -1,0 +1,9 @@
+[all:vars]
+ocp4_workload_connectivity_link_aws_access_key={{ aws_key }}
+ocp4_workload_connectivity_link_aws_secret_access_key={{ aws_secret }}
+ocp4_workload_connectivity_link_aws_managed_zone_id={{ managed_zone_id }}
+ocp4_workload_connectivity_link_main_domain={{ domain_name }}
+ocp4_workload_connectivity_link_aws_managed_zone_domain={{ subdomain_name }}.{{ domain_name }}
+ocp4_workload_connectivity_link_aws_managed_zone_region=us-east-1
+ocp4_workload_connectivity_link_ingress_gateway_tls_issuer_email={{ email_cert }}
+ocp4_workload_connectivity_link_gateway_geo_code=br
