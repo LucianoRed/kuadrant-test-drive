@@ -6,6 +6,14 @@ Scripts Ansible para preparar ambiente de TD de quadrant
 * Um cluster OpenShift
 * Ansible instalado
 
+### Test Drive Guia
+```bash
+oc new-project td-rhcl
+oc new-app quay.io/ricardi/rhcltd
+oc expose service/rhcltd
+oc get route
+```
+
 ### Managed Zone
 Supondo que voce esteja usando o ambiente de demo aws open da Red Hat, voce deve ter recebido nas instrucoes um dominio tipo sandbox1198.opentlc.com ou algo parecido. Tenha esse dominio como o seu <top domain>. Vamos criar um managed.<top domain>.
 
